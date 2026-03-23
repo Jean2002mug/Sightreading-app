@@ -6,14 +6,18 @@ package modelTest;
 */
 
 
+import java.util.Set;
+
+import javax.sound.midi.MidiChannel;
+import javax.sound.midi.ShortMessage;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import javax.sound.midi.MidiChannel;
-import javax.sound.midi.MidiMessage;
-import javax.sound.midi.ShortMessage;
-import java.util.Set;
+
 import model.MidiInputReceiver;
-import static org.junit.Assert.*;
 
 public class MidiInputReceiverTest {
 
