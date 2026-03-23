@@ -34,6 +34,11 @@ public class MidiInputReceiverTest {
                 // Stub implementation
             }
 
+            @Override
+            public void noteOff(int noteNumber, int velocity) {
+                // Stub implementation
+            }
+
             // Implement other MidiChannel methods as no-op or throw UnsupportedOperationException
             @Override
             public void setPolyPressure(int noteNumber, int pressure) {}
