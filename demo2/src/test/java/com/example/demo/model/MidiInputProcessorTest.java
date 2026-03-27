@@ -1,4 +1,4 @@
-package modelTest;
+package com.example.demo.model;
 
 /**
  * @author Jean Michel Mugabe
@@ -14,7 +14,7 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.MidiInputProcessor;
+import com.example.demo.model.MidiInputProcessor;
 
 public class MidiInputProcessorTest {
 

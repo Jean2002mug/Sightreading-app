@@ -1,4 +1,4 @@
-package modelTest;
+package com.example.demo.model;
 
 /**
  * @author Jean Michel Mugabe
@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.MidiSetup;
+import com.example.demo.model.MidiSetup;
 
 public class MidiSetupTest {
 

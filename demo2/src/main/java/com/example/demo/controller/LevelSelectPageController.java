@@ -1,11 +1,11 @@
-package com.example.demo;
+package com.example.demo.controller;
+
+import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class LevelSelectPageController {
     private Stage stage;
@@ -24,7 +24,7 @@ public class LevelSelectPageController {
 
     private void moveToDescriptionPage(int minComplexity, int maxComplexity, String description) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("LevelDescription.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/LevelDescription.fxml"));
             Parent root = loader.load();
 
             LevelDescriptionController controller = loader.getController();
@@ -39,3 +39,4 @@ public class LevelSelectPageController {
         }
     }
 }
+

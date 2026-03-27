@@ -1,4 +1,4 @@
-package model;
+package com.example.demo.model;
 
 /*
  * This class is responsible for setting up MIDI- keyboard.

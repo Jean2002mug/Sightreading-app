@@ -1,4 +1,4 @@
-package model;
+package com.example.demo.model;
 
 import javafx.event.Event;
 import javafx.event.EventType;
@@ -22,3 +22,4 @@ public class NoteEvent extends Event {
         return velocity;
     }
 }
+

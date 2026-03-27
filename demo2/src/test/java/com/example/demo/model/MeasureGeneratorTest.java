@@ -1,11 +1,11 @@
-package modelTest;
+package com.example.demo.model;
 
 /**
  * @author Jean Michel Mugabe
 */
 
-import model.Chord;
-import model.MeasureGenerator;
+import com.example.demo.model.Chord;
+import com.example.demo.model.MeasureGenerator;
 import org.junit.Before;
 import org.junit.Test;
 

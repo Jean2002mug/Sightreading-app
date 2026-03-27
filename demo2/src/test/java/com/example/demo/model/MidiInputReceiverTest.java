@@ -1,4 +1,4 @@
-package modelTest;
+package com.example.demo.model;
 
 
 /**
@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.MidiInputReceiver;
+import com.example.demo.model.MidiInputReceiver;
 
 public class MidiInputReceiverTest {
 

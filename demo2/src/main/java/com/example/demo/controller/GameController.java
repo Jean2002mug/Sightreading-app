@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +14,9 @@ import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Synthesizer;
 
+import com.example.demo.model.Chord;
+import com.example.demo.model.MeasureGenerator;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
@@ -28,8 +31,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.Chord;
-import model.MeasureGenerator;
 
 /**
  * this class represents the gameplay screen of the sightreading app game
@@ -155,7 +156,7 @@ public class GameController {
     private void  moveToNextPage(){
         try {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("result-page.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/result-page.fxml"));
             Parent root = loader.load();
 
             ResultPageController controller = loader.getController();
@@ -358,3 +359,4 @@ private  class MidiInputReceiver implements Receiver {
     }
 }
 }
+

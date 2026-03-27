@@ -2,6 +2,8 @@ package com.example.demo;
 
 import java.io.IOException;
 
+import com.example.demo.controller.LevelSelectPageController;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

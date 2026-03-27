@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.GameController">
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.GameController">
    <children>
       <Label fx:id="chordLabel" layoutX="650.0" layoutY="153.0" prefHeight="114.0" prefWidth="103.0" />
    <Label fx:id="scoreLabel" layoutX="400" layoutY="25" prefHeight="114.0" prefWidth="150.0" text="Score: 0">

@@ -1,9 +1,9 @@
-package modelTest;
+package com.example.demo.model;
 
 /**
  * @author Jean Michel Mugabe
  */
-import model.Chord;
+import com.example.demo.model.Chord;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;

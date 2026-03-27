@@ -1,6 +1,8 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 import java.io.IOException;
+
+import com.example.demo.model.MeasureGenerator;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import model.MeasureGenerator;
 
 public class LevelDescriptionController {
     private Stage stage;
@@ -37,7 +38,7 @@ public class LevelDescriptionController {
     @FXML
     private void startLevel() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("clock.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/clock.fxml"));
             Parent root = loader.load();
 
             CountDownController controller = loader.getController();
@@ -53,3 +54,4 @@ public class LevelDescriptionController {
         }
     }
 }
+
