@@ -3,10 +3,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.LevelDescriptionController">
+<AnchorPane prefHeight="600.0" prefWidth="1200.0"
+            style="-fx-background-color: #6A0DAD;"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.demo.controller.LevelDescriptionController">
    <children>
-      <Label fx:id="descriptionLabel" layoutX="100.0" layoutY="50.0" prefWidth="1000.0" prefHeight="100.0" text="Level Description" wrapText="true" 
-             style="-fx-font-size: 18px; -fx-text-alignment: center;" />
-      <Button fx:id="startButton" layoutX="500.0" layoutY="450.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="200.0" text="Start Level" onAction="#startLevel" />
+      <Label fx:id="descriptionLabel" layoutX="100.0" layoutY="50.0" prefWidth="1000.0" prefHeight="200.0" text="Level Description" wrapText="true"
+             style="-fx-font-size: 22px; -fx-text-fill: #FFD700; -fx-font-weight: bold; -fx-text-alignment: center; -fx-alignment: CENTER;" />
+      <Button fx:id="startButton" layoutX="500.0" layoutY="450.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="200.0" text="Start Level" onAction="#startLevel"
+              style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-size: 18px; -fx-font-weight: bold; -fx-background-radius: 8;" />
    </children>
 </AnchorPane>

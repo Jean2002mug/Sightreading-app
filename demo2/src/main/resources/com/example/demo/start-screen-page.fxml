@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="600.0" prefWidth="1200.0"
+            style="-fx-background-color: #6A0DAD;"
+            xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.demo.controller.StartScreenController">
+    <children>
+        <Label layoutX="200.0" layoutY="80.0" prefHeight="100.0" prefWidth="800.0"
+               text="Welcome to the Sight Reading App"
+               style="-fx-text-fill: #FFD700; -fx-font-size: 42px; -fx-font-weight: bold; -fx-font-family: Arial; -fx-alignment: CENTER;" />
+
+        <Button layoutX="475.0" layoutY="280.0" prefHeight="60.0" prefWidth="250.0"
+                text="▶  Play"
+                style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-size: 22px; -fx-font-weight: bold; -fx-background-radius: 8;"
+                onAction="#handlePlay" />
+
+        <Button layoutX="1150.0" layoutY="50.0" prefHeight="40.0" prefWidth="40.0"
+                text="Exit"
+                style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-weight: bold; -fx-background-radius: 6;"
+                onAction="#exitApp" />
+
+        <Button layoutX="1100.0" layoutY="50.0" prefHeight="40.0" prefWidth="40.0"
+                text="Maximize"
+                style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-weight: bold; -fx-background-radius: 6;"
+                onAction="#maximizeApp" />
+    </children>
+</AnchorPane>

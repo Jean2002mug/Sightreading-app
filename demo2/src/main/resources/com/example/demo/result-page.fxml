@@ -4,32 +4,40 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1200" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.ResultPageController">
+<AnchorPane prefHeight="600.0" prefWidth="1200"
+            style="-fx-background-color: #6A0DAD;"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.demo.controller.ResultPageController">
    <children>
-      <Label layoutX="560" layoutY="100" prefHeight="114.0" prefWidth="150.0" text="Score:">
+      <Label layoutX="560" layoutY="100" prefHeight="114.0" prefWidth="150.0" text="Score:"
+             style="-fx-text-fill: #FFD700;">
          <font>
          <Font size="50" />
          </font>
       </Label>
 
-      <Label layoutX="520" layoutY="200" prefHeight="114.0" prefWidth="250.0" text="Accuracy:">
+      <Label layoutX="520" layoutY="200" prefHeight="114.0" prefWidth="250.0" text="Accuracy:"
+             style="-fx-text-fill: #FFD700;">
          <font>
          <Font size="50" />
          </font>
       </Label>
 
-      <Label fx:id="scoreLabel" layoutX="600" layoutY="153.0" prefHeight="114.0" prefWidth="103.0" text="Label" textAlignment="JUSTIFY">
+      <Label fx:id="scoreLabel" layoutX="600" layoutY="153.0" prefHeight="114.0" prefWidth="103.0" text="Label" textAlignment="JUSTIFY"
+             style="-fx-text-fill: #FFD700;">
          <font>
          <Font size="50.0" />
       </font>
       </Label>
 
-      <Label fx:id="accuracyLabel" layoutX="600" layoutY="253.0" prefHeight="114.0" prefWidth="103.0" text="Label" textAlignment="JUSTIFY">
+      <Label fx:id="accuracyLabel" layoutX="600" layoutY="253.0" prefHeight="114.0" prefWidth="103.0" text="Label" textAlignment="JUSTIFY"
+             style="-fx-text-fill: #FFD700;">
          <font>
          <Font size="50.0" />
       </font>
       </Label>
-      <Button layoutX="560" layoutY="400" prefWidth="120"  onAction="#moveToNextPage" text="home">
+      <Button layoutX="560" layoutY="400" prefWidth="120" onAction="#moveToNextPage" text="Home"
+              style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-weight: bold; -fx-background-radius: 6;">
       </Button>
 
    </children>

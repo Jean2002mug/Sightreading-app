@@ -6,16 +6,22 @@
 <?import javafx.scene.text.*?>
 
 
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.GameController">
+<AnchorPane prefHeight="600.0" prefWidth="1200.0"
+            style="-fx-background-color: #6A0DAD;"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.demo.controller.GameController">
    <children>
-      <Label fx:id="chordLabel" layoutX="650.0" layoutY="153.0" prefHeight="114.0" prefWidth="103.0" />
-   <Label fx:id="scoreLabel" layoutX="400" layoutY="25" prefHeight="114.0" prefWidth="150.0" text="Score: 0">
+      <Label fx:id="chordLabel" layoutX="650.0" layoutY="153.0" prefHeight="114.0" prefWidth="103.0"
+             style="-fx-text-fill: #FFD700;" />
+   <Label fx:id="scoreLabel" layoutX="400" layoutY="25" prefHeight="114.0" prefWidth="150.0" text="Score: 0"
+          style="-fx-text-fill: #FFD700;">
 
             <font>
                 <Font size="36.0" />
             </font>
    </Label>
-       <Label text="Time:" fx:id="countDownLabel" layoutX="600" layoutY="25" prefHeight="114.0" prefWidth="200.0">
+       <Label text="Time:" fx:id="countDownLabel" layoutX="600" layoutY="25" prefHeight="114.0" prefWidth="200.0"
+             style="-fx-text-fill: #FFD700;">
            <font>
                <Font size="36.0"/>
            </font>

@@ -3,13 +3,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.LevelSelectPageController">
+<AnchorPane prefHeight="600.0" prefWidth="1200.0"
+            style="-fx-background-color: #6A0DAD;"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.demo.controller.LevelSelectPageController">
    <children>
-      <Button onAction="#levelOne" layoutX="180.0" layoutY="85" mnemonicParsing="false" prefHeight="160" prefWidth="160" text="1" />
-      <Button onAction="#levelTwo" layoutX="500.0" layoutY="85.0" mnemonicParsing="false" prefHeight="160" prefWidth="160" text="2" />
-      <Button layoutX="840.0" layoutY="85.0" mnemonicParsing="false" prefHeight="160" prefWidth="160" text="3" />
-      <Button layoutX="180.0" layoutY="330.0" mnemonicParsing="false" prefHeight="160" prefWidth="160" text="4" />
-      <Button layoutX="500.0" layoutY="330.0" mnemonicParsing="false" prefHeight="160" prefWidth="160" text="5" />
-      <Button layoutX="840.0" layoutY="330.0" mnemonicParsing="false" prefHeight="160" prefWidth="160" text="6" />
+      <Label layoutX="400.0" layoutY="20.0" prefWidth="400.0" text="Select a Level"
+             style="-fx-text-fill: #FFD700; -fx-font-size: 32px; -fx-font-weight: bold;" />
+      <Button onAction="#levelOne" layoutX="180.0" layoutY="85" mnemonicParsing="false" prefHeight="160" prefWidth="160" text="1"
+              style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-size: 48px; -fx-font-weight: bold; -fx-background-radius: 10;" />
+      <Button onAction="#levelTwo" layoutX="500.0" layoutY="85.0" mnemonicParsing="false" prefHeight="160" prefWidth="160" text="2"
+              style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-size: 48px; -fx-font-weight: bold; -fx-background-radius: 10;" />
+      <Button layoutX="840.0" layoutY="85.0" mnemonicParsing="false" prefHeight="160" prefWidth="160" text="3"
+              style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-size: 48px; -fx-font-weight: bold; -fx-background-radius: 10;" />
+      <Button layoutX="180.0" layoutY="330.0" mnemonicParsing="false" prefHeight="160" prefWidth="160" text="4"
+              style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-size: 48px; -fx-font-weight: bold; -fx-background-radius: 10;" />
+      <Button layoutX="500.0" layoutY="330.0" mnemonicParsing="false" prefHeight="160" prefWidth="160" text="5"
+              style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-size: 48px; -fx-font-weight: bold; -fx-background-radius: 10;" />
+      <Button layoutX="840.0" layoutY="330.0" mnemonicParsing="false" prefHeight="160" prefWidth="160" text="6"
+              style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-size: 48px; -fx-font-weight: bold; -fx-background-radius: 10;" />
    </children>
 </AnchorPane>
