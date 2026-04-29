@@ -24,10 +24,10 @@ public class CountDownController {
     private static final int COUNTDOWN_SECONDS = 3; // Countdown duration
     private int timeRemaining = COUNTDOWN_SECONDS;
     private Stage stage;
-
-    private int minComplexity;
-    private int maxComplexity;
-    private MeasureGenerator generator;
+   // Variables to hold the complexity levels and the measure generator for the game
+    private int minComplexity;// Minimum complexity level for the game
+    private int maxComplexity;// Maximum complexity level for the game
+    private MeasureGenerator generator;// Object responsible for generating musical measures based on the specified complexity levels
 
 
     public void setState(int minComplexity, int maxComplexity, MeasureGenerator generator){

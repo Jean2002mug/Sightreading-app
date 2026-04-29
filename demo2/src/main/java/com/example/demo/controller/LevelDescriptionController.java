@@ -14,9 +14,10 @@ import javafx.stage.Stage;
 
 public class LevelDescriptionController {
     private Stage stage;
-    private int minComplexity;
-    private int maxComplexity;
-    private MeasureGenerator generator;
+    // Variables to hold the complexity levels and the measure generator for the game
+    private int minComplexity;// Minimum complexity level for the game
+    private int maxComplexity;// Maximum complexity level for the game
+    private MeasureGenerator generator;// Object responsible for generating musical measures based on the specified complexity levels
 
     @FXML
     private Label descriptionLabel;
@@ -47,6 +48,21 @@ public class LevelDescriptionController {
 
             Scene scene = new Scene(root);
             controller.startCountdown();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void goBack() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/level-select-page.fxml"));
+            Parent root = loader.load();
+            LevelSelectPageController controller = loader.getController();
+            controller.setStage(stage);
+            Scene scene = new Scene(root, 1200, 600);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

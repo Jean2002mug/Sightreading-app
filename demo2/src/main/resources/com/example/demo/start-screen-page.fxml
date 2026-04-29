@@ -2,13 +2,26 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.*?>
 <AnchorPane prefHeight="600.0" prefWidth="1200.0"
-            style="-fx-background-color: #6A0DAD;"
+                        style="-fx-background-color: linear-gradient(to bottom, #6A0DAD, #4C0B80);"
             xmlns="http://javafx.com/javafx/17.0.2-ea"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.demo.controller.StartScreenController">
     <children>
+                <Line startX="100.0" startY="510.0" endX="100.0" endY="450.0" stroke="#FFD700" strokeWidth="5.0" opacity="0.35" />
+                <Circle centerX="90.0" centerY="520.0" radius="14.0" fill="#FFD700" opacity="0.35" />
+                <Line startX="280.0" startY="180.0" endX="280.0" endY="110.0" stroke="#FFD700" strokeWidth="5.0" opacity="0.35" />
+                <Circle centerX="268.0" centerY="190.0" radius="14.0" fill="#FFD700" opacity="0.35" />
+                <Line startX="510.0" startY="500.0" endX="510.0" endY="430.0" stroke="#FFD700" strokeWidth="5.0" opacity="0.35" />
+                <Circle centerX="500.0" centerY="510.0" radius="14.0" fill="#FFD700" opacity="0.35" />
+                <Line startX="760.0" startY="210.0" endX="760.0" endY="140.0" stroke="#FFD700" strokeWidth="5.0" opacity="0.35" />
+                <Circle centerX="748.0" centerY="220.0" radius="14.0" fill="#FFD700" opacity="0.35" />
+                <Line startX="1020.0" startY="460.0" endX="1020.0" endY="390.0" stroke="#FFD700" strokeWidth="5.0" opacity="0.35" />
+                <Circle centerX="1008.0" centerY="470.0" radius="14.0" fill="#FFD700" opacity="0.35" />
+
         <Label layoutX="200.0" layoutY="80.0" prefHeight="100.0" prefWidth="800.0"
                text="Welcome to the Sight Reading App"
                style="-fx-text-fill: #FFD700; -fx-font-size: 42px; -fx-font-weight: bold; -fx-font-family: Arial; -fx-alignment: CENTER;" />
@@ -18,14 +31,18 @@
                 style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-size: 22px; -fx-font-weight: bold; -fx-background-radius: 8;"
                 onAction="#handlePlay" />
 
-        <Button layoutX="1150.0" layoutY="50.0" prefHeight="40.0" prefWidth="40.0"
+        <Button layoutX="1000.0" layoutY="50.0" prefHeight="50.0" prefWidth="70.0"
                 text="Exit"
-                style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-weight: bold; -fx-background-radius: 6;"
+                style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 12px;"
                 onAction="#exitApp" />
 
-        <Button layoutX="1100.0" layoutY="50.0" prefHeight="40.0" prefWidth="40.0"
+        <Button layoutX="900.0" layoutY="50.0" prefHeight="50.0" prefWidth="90.0"
                 text="Maximize"
-                style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-weight: bold; -fx-background-radius: 6;"
+                style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 12px;"
                 onAction="#maximizeApp" />
+        <Button layoutX="790.0" layoutY="50.0" prefHeight="50.0" prefWidth="100.0"
+                text="Minimize"
+                style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 12px;"
+                onAction="#minimizeApp" />
     </children>
 </AnchorPane>

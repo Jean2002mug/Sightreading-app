@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-padding: 20; -fx-background-color: #6A0DAD;"
+      xmlns="http://javafx.com/javafx/17.0.2-ea"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.demo.controller.TipsDialogController">
+    <children>
+        <Label text="Tips &amp; Instructions"
+               style="-fx-text-fill: #FFD700; -fx-font-size: 18px; -fx-font-weight: bold; -fx-alignment: CENTER;" />
+        <TextArea wrapText="true" editable="false" prefRowCount="8"
+                  style="-fx-control-inner-background: #4C0B80; -fx-text-fill: #FFD700; -fx-font-size: 14px;"
+                  text="Welcome to the Sight Reading App!
+
+1. OBJECTIVE: Play the displayed chord notes on your MIDI keyboard as quickly and accurately as possible.
+
+2. CONTROLS: Connect your MIDI keyboard to start. Each note displayed represents a chord.
+
+3. SCORING: Correct chords earn you points. Be accurate and fast!
+
+4. TIME LIMIT: You have 60 seconds to complete as many chords as possible.
+
+5. LEVELS: Choose from different difficulty levels based on chord complexity.
+
+6. PAUSE: Click the Pause button to pause the game at any time.
+
+7. QUIT: Click Quit to exit the game and return to level selection.
+
+Good luck! Have fun learning sight reading!" />
+        <Button text="Close" prefWidth="100.0"
+                style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 14px;"
+                onAction="#closeDialog" />
+    </children>
+</VBox>

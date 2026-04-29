@@ -20,8 +20,9 @@ public class StartScreenController {
     @FXML
     private void handlePlay() {
         try {
+            // gets the fxml file from the resource folder and loads it to create the scene for the level select page
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/level-select-page.fxml"));
-            Parent root = loader.load();
+            Parent root = loader.load();// loads the fxml file and returns the root node of the scene graph which is the top-level container for all the UI elements in the scene
             LevelSelectPageController controller = loader.getController();
             controller.setStage(stage);
             Scene scene = new Scene(root, 1200, 600);
@@ -40,7 +41,13 @@ public class StartScreenController {
     @FXML
     private void maximizeApp() {
         if (stage != null) {
-            stage.setMaximized(true);
+            stage.setMaximized(!stage.isMaximized());
+        }
+    }
+    @FXML
+    private void minimizeApp(){
+        if(stage!=null){
+            stage.setIconified(true);// Minimize the stage
         }
     }
 }

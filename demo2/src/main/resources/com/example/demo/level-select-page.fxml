@@ -2,14 +2,31 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 
 <AnchorPane prefHeight="600.0" prefWidth="1200.0"
-            style="-fx-background-color: #6A0DAD;"
+                style="-fx-background-color: linear-gradient(to bottom, #6A0DAD, #4C0B80);"
             xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.demo.controller.LevelSelectPageController">
    <children>
+        <Line startX="100.0" startY="510.0" endX="100.0" endY="450.0" stroke="#FFD700" strokeWidth="5.0" opacity="0.35" />
+        <Circle centerX="90.0" centerY="520.0" radius="14.0" fill="#FFD700" opacity="0.35" />
+        <Line startX="280.0" startY="180.0" endX="280.0" endY="110.0" stroke="#FFD700" strokeWidth="5.0" opacity="0.35" />
+        <Circle centerX="268.0" centerY="190.0" radius="14.0" fill="#FFD700" opacity="0.35" />
+        <Line startX="510.0" startY="500.0" endX="510.0" endY="430.0" stroke="#FFD700" strokeWidth="5.0" opacity="0.35" />
+        <Circle centerX="500.0" centerY="510.0" radius="14.0" fill="#FFD700" opacity="0.35" />
+        <Line startX="760.0" startY="210.0" endX="760.0" endY="140.0" stroke="#FFD700" strokeWidth="5.0" opacity="0.35" />
+        <Circle centerX="748.0" centerY="220.0" radius="14.0" fill="#FFD700" opacity="0.35" />
+        <Line startX="1020.0" startY="460.0" endX="1020.0" endY="390.0" stroke="#FFD700" strokeWidth="5.0" opacity="0.35" />
+        <Circle centerX="1008.0" centerY="470.0" radius="14.0" fill="#FFD700" opacity="0.35" />
+
       <Label layoutX="400.0" layoutY="20.0" prefWidth="400.0" text="Select a Level"
              style="-fx-text-fill: #FFD700; -fx-font-size: 32px; -fx-font-weight: bold;" />
+      <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0" text="← Back to Start"
+              style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 8;" onAction="#backToStartPage" />
+      <Button layoutX="970.0" layoutY="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Exit App →"
+              style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 8;" onAction="#exitApp" />
       <Button onAction="#levelOne" layoutX="180.0" layoutY="85" mnemonicParsing="false" prefHeight="160" prefWidth="160" text="1"
               style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-size: 48px; -fx-font-weight: bold; -fx-background-radius: 10;" />
       <Button onAction="#levelTwo" layoutX="500.0" layoutY="85.0" mnemonicParsing="false" prefHeight="160" prefWidth="160" text="2"

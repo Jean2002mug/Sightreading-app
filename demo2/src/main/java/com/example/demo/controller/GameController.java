@@ -72,23 +72,32 @@ public class GameController {
         this.measureGenerator =  new MeasureGenerator(1, 11, 1,4);
         newMeasure();
     }
-
+    
     @FXML
+    // ImageView to display the current note/chord that the player needs to play
     private ImageView noteView;
 
     @FXML
+    // ImageView to display feedback on whether the player's input was correct or incorrect
     private ImageView feedbackView;
 
 
     private void startCountDown(){
+        // Start the countdown timer for the game level
+        // The timer updates the countDownLabel every second and checks if the time has run out to move to the next page
         countdownTimer = new Timeline(new KeyFrame(
+            // Set the duration which is the interval of each KeyFrame which is the countdown update interval to 1 second
             Duration.seconds(1),
+            // Define the event handler for each KeyFrame, which will be executed every second
             event -> {
                 timeRemaining--;
                 int minutes = timeRemaining / 60;
                 int seconds = timeRemaining % 60;
                 String minutesString = Integer.toString(minutes);
                 String secondsString = seconds < 10 ? "0" + Integer.toString(seconds) : Integer.toString(seconds);
+                // Update the countDownLabel with the remaining time in the format "Time: MM:SS"
+                // using platform.runlater which is a method that allows us to update the UI from a non-UI thread
+                // since the countdown timer runs on a separate thread and we need to update the UI with the remaining time
                 Platform.runLater(() -> {
                     countDownLabel.setText("Time: " + minutesString + ":" + secondsString);
                 });
@@ -98,11 +107,15 @@ public class GameController {
                     }
             }
         ));
+        // Set the cycle count to indefinite so that the timer continues until we manually stop it when the time runs out
         countdownTimer.setCycleCount(Timeline.INDEFINITE);
+        // Start the countdown timer
         countdownTimer.play();
     }
 
     private void newMeasure(){
+        // Generate a new measure using the measure generator based on the specified complexity levels 
+        // and update the noteView with the first chord of the new measure
         this.currentMeasure = this.measureGenerator.nextMeasure(minComplexity, maxComplexity);
 
         Platform.runLater(()->{
@@ -112,7 +125,7 @@ public class GameController {
             noteView.setImage(image);
         });
     }
-
+    // Check if the current measure is complete by comparing the current beat index with the size of the current measure
     private boolean measureComplete(){
         return currentBeat == currentMeasure.size();
     }
@@ -131,12 +144,17 @@ public class GameController {
         }
         return false;
     }
-
+    /*
+     * Sets the complexity levels for the game.
+     * @param minComplexity Minimum complexity level
+     * @param maxComplexity Maximum complexity level
+     */
     public void setComplexity(int minComplexity, int maxComplexity){
         this.minComplexity = minComplexity;
         this.maxComplexity = maxComplexity;
     }
    @FXML
+   // Initializes the game by setting the time remaining, current beat, score, setting up MIDI connections, and starting the countdown timer
    public void initialize(){
         this.timeRemaining = 60;
         currentBeat = 0;
@@ -144,7 +162,7 @@ public class GameController {
         setupMidi();
         startCountDown();
     }
-
+    // Increments the player's score and updates the scoreLabel on the UI thread using Platform.runLater to ensure thread safety when updating the UI from a non-UI thread
     private void incrementScore(){
         score++;
         Platform.runLater(() -> {
@@ -171,6 +189,97 @@ public class GameController {
 
         }
 
+    }
+    @FXML
+    private void pauseGame() {
+        if (countdownTimer != null) {
+            countdownTimer.pause();
+        }
+    }
+
+    private void showQuitConfirmation() {
+        pauseGame();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/quit-confirmation.fxml"));
+            Parent root = loader.load();
+            Stage confirmStage = new Stage();
+            confirmStage.setTitle("Confirm Quit");
+            confirmStage.setScene(new Scene(root, 400, 150));
+            confirmStage.setResizable(false);
+            confirmStage.initStyle(javafx.stage.StageStyle.UTILITY);
+            confirmStage.showAndWait();
+            
+            // Check if user confirmed quit
+            Object result = confirmStage.getUserData();
+            if (result != null && result.equals("quit_confirmed")) {
+                goBackToLevelSelection();
+            } else {
+                if (countdownTimer != null) {
+                    countdownTimer.play();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            if (countdownTimer != null) {
+                countdownTimer.play();
+            }
+        }
+    }
+
+    private void goBackToLevelSelection() {
+        if (countdownTimer != null) {
+            countdownTimer.stop();
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/level-select-page.fxml"));
+            Parent root = loader.load();
+            LevelSelectPageController controller = loader.getController();
+            controller.setStage(stage);
+            Scene scene = new Scene(root, 1200, 600);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showTips() {
+        pauseGame();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/tips-dialog.fxml"));
+            Parent root = loader.load();
+            Stage tipsStage = new Stage();
+            tipsStage.setTitle("Tips & Instructions");
+            tipsStage.setScene(new Scene(root, 500, 300));
+            tipsStage.setResizable(true);
+            tipsStage.initStyle(javafx.stage.StageStyle.UTILITY);
+            tipsStage.setOnHidden(event -> {
+                if (countdownTimer != null) {
+                    countdownTimer.play();
+                }
+            });
+            tipsStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+            if (countdownTimer != null) {
+                countdownTimer.play();
+            }
+        }
+    }
+
+    public void handleQuitAction() {
+        showQuitConfirmation();
+    }
+
+    public void handleTipsAction() {
+        showTips();
+    }
+
+    public void handleMenuAction() {
+        pauseGame();
+        if (countdownTimer != null) {
+            countdownTimer.play();
+        }
     }
 
     private void setupMidi(){
