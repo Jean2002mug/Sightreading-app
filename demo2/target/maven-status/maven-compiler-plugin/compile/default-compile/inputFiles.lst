@@ -1,14 +1,15 @@
-C:\Users\jeanm\OneDrive\Documents\GitHub\Sightreading-app\demo2\src\main\java\com\example\demo\controller\GameController.java
-C:\Users\jeanm\OneDrive\Documents\GitHub\Sightreading-app\demo2\src\main\java\com\example\demo\model\NoteEvent.java
-C:\Users\jeanm\OneDrive\Documents\GitHub\Sightreading-app\demo2\src\main\java\module-info.java
-C:\Users\jeanm\OneDrive\Documents\GitHub\Sightreading-app\demo2\src\main\java\com\example\demo\controller\LevelSelectPageController.java
-C:\Users\jeanm\OneDrive\Documents\GitHub\Sightreading-app\demo2\src\main\java\com\example\demo\model\MidiSetup.java
-C:\Users\jeanm\OneDrive\Documents\GitHub\Sightreading-app\demo2\src\main\java\com\example\demo\controller\HelloController.java
-C:\Users\jeanm\OneDrive\Documents\GitHub\Sightreading-app\demo2\src\main\java\com\example\demo\controller\CountDownController.java
-C:\Users\jeanm\OneDrive\Documents\GitHub\Sightreading-app\demo2\src\main\java\com\example\demo\controller\ResultPageController.java
-C:\Users\jeanm\OneDrive\Documents\GitHub\Sightreading-app\demo2\src\main\java\com\example\demo\model\MidiInputReceiver.java
-C:\Users\jeanm\OneDrive\Documents\GitHub\Sightreading-app\demo2\src\main\java\com\example\demo\model\Chord.java
-C:\Users\jeanm\OneDrive\Documents\GitHub\Sightreading-app\demo2\src\main\java\com\example\demo\model\MeasureGenerator.java
-C:\Users\jeanm\OneDrive\Documents\GitHub\Sightreading-app\demo2\src\main\java\com\example\demo\controller\LevelDescriptionController.java
-C:\Users\jeanm\OneDrive\Documents\GitHub\Sightreading-app\demo2\src\main\java\com\example\demo\model\MidiInputProcessor.java
-C:\Users\jeanm\OneDrive\Documents\GitHub\Sightreading-app\demo2\src\main\java\com\example\demo\HelloApplication.java
+C:\Users\Jean Mugabe\Sightreading app\Sightreading-app\demo2\src\main\java\com\example\demo\controller\HelloController.java
+C:\Users\Jean Mugabe\Sightreading app\Sightreading-app\demo2\src\main\java\com\example\demo\controller\LevelSelectPageController.java
+C:\Users\Jean Mugabe\Sightreading app\Sightreading-app\demo2\src\main\java\com\example\demo\HelloApplication.java
+C:\Users\Jean Mugabe\Sightreading app\Sightreading-app\demo2\src\main\java\com\example\demo\controller\LoadingScreenController.java
+C:\Users\Jean Mugabe\Sightreading app\Sightreading-app\demo2\src\main\java\com\example\demo\model\MeasureGenerator.java
+C:\Users\Jean Mugabe\Sightreading app\Sightreading-app\demo2\src\main\java\com\example\demo\controller\CountDownController.java
+C:\Users\Jean Mugabe\Sightreading app\Sightreading-app\demo2\src\main\java\com\example\demo\controller\QuitConfirmationController.java
+C:\Users\Jean Mugabe\Sightreading app\Sightreading-app\demo2\src\main\java\module-info.java
+C:\Users\Jean Mugabe\Sightreading app\Sightreading-app\demo2\src\main\java\com\example\demo\controller\ResultPageController.java
+C:\Users\Jean Mugabe\Sightreading app\Sightreading-app\demo2\src\main\java\com\example\demo\controller\TipsDialogController.java
+C:\Users\Jean Mugabe\Sightreading app\Sightreading-app\demo2\src\main\java\com\example\demo\controller\GameController.java
+C:\Users\Jean Mugabe\Sightreading app\Sightreading-app\demo2\src\main\java\com\example\demo\controller\LevelDescriptionController.java
+C:\Users\Jean Mugabe\Sightreading app\Sightreading-app\demo2\src\main\java\com\example\demo\model\Chord.java
+C:\Users\Jean Mugabe\Sightreading app\Sightreading-app\demo2\src\main\java\com\example\demo\controller\StartScreenController.java
+C:\Users\Jean Mugabe\Sightreading app\Sightreading-app\demo2\src\main\java\com\example\SpringBootApp.java

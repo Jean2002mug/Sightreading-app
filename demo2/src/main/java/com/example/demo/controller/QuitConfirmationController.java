@@ -2,7 +2,9 @@ package com.example.demo.controller;
 
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
+import org.springframework.stereotype.Component;
 
+@Component
 public class QuitConfirmationController {
 
     @FXML

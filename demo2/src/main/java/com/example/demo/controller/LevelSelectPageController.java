@@ -8,6 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class LevelSelectPageController {
     private Stage stage;
 

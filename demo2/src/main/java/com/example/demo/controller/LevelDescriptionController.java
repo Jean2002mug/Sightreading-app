@@ -12,6 +12,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class LevelDescriptionController {
     private Stage stage;
     // Variables to hold the complexity levels and the measure generator for the game

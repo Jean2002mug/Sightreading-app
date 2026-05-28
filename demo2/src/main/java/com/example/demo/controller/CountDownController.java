@@ -14,6 +14,10 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import org.springframework.stereotype.Component;
+
+@Component
+
 public class CountDownController {
 
     @FXML

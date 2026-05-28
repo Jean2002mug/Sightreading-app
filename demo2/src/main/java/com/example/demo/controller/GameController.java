@@ -14,6 +14,14 @@ import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Synthesizer;
 
+import com.example.demo.service.GameSessionService;
+import com.example.demo.service.KeyboardInputService;
+import com.example.demo.service.MidiService;
+import com.example.demo.service.SettingsService;
+import com.example.demo.settings.InputMode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.example.demo.model.Chord;
 import com.example.demo.model.MeasureGenerator;
 
@@ -38,10 +46,12 @@ import javafx.util.Duration;
  * @author Lucas Arsenault
  * @author 
  */
+
+@Component
+
 public class GameController {
 
-    private MidiInputReceiver receiver;
-    private MidiDevice device ;
+   
     private MeasureGenerator measureGenerator;
 
     private int minComplexity;
@@ -81,6 +91,17 @@ public class GameController {
     // ImageView to display feedback on whether the player's input was correct or incorrect
     private ImageView feedbackView;
 
+    @Autowired
+    private MidiService midiService;
+
+    @Autowired
+    private KeyboardInputService keyboardInputService;
+
+    @Autowired
+    private SettingsService settingsService;
+
+    @Autowired
+    private GameSessionService gameSessionService;
 
     private void startCountDown(){
         // Start the countdown timer for the game level
@@ -158,9 +179,8 @@ public class GameController {
    public void initialize(){
         this.timeRemaining = 60;
         currentBeat = 0;
-        this.score = 0;
-        setupMidi();
         startCountDown();
+        setupInputMode();
     }
     // Increments the player's score and updates the scoreLabel on the UI thread using Platform.runLater to ensure thread safety when updating the UI from a non-UI thread
     private void incrementScore(){
@@ -168,6 +188,28 @@ public class GameController {
         Platform.runLater(() -> {
             scoreLabel.setText("Score: " + score);
         });
+    }
+
+    private void setupInputMode() {
+
+        InputMode mode = settingsService.getInputMode();
+
+        if (mode == InputMode.MIDI || mode == InputMode.AUTO_DETECT) {
+
+            boolean connected = midiService.connectMidiDevice();
+
+            if (connected) {
+
+                midiService.setNoteListener(this::handleInputNotes);
+
+                System.out.println("Using MIDI input");
+
+                return;
+            }
+        }
+
+        System.out.println("Using computer keyboard");
+
     }
 
 
@@ -182,6 +224,7 @@ public class GameController {
             controller.accuracyLabel(this.score, this.totalMeasures);
             controller.setStage(stage);
             Scene scene = new Scene(root);
+            keyboardInputService.attachToScene(scene);
             stage.setScene(scene);
             stage.show();
 
@@ -281,191 +324,56 @@ public class GameController {
             countdownTimer.play();
         }
     }
+    private void handleInputNotes(Set<Integer> notes) {
 
-    private void setupMidi(){
-        MidiDevice.Info[] deviceInfo = MidiSystem.getMidiDeviceInfo();
-        for(int i=0; i< deviceInfo.length;i++){
-            try {
-                MidiDevice device = MidiSystem.getMidiDevice(deviceInfo[i]);
-                if (!device.isOpen()){
-                    device.open();
-                }
-                System.out.println("Successfully connected to: " + deviceInfo[i]);
-                
-                // Set the MIDI input reciever to get MIDI data from the device 
-                Synthesizer synthesizer = MidiSystem.getSynthesizer();
-                synthesizer.open();
-                MidiChannel channel = synthesizer.getChannels()[0];
-                receiver = new MidiInputReceiver(device.getDeviceInfo().toString(), channel);
-                device.getTransmitter().setReceiver(receiver);
-                
-            } catch (Exception e) {
-                e.printStackTrace();
+        currentNotes = notes;
+
+        boolean correct =
+                currentNotes.equals(currentMeasure.get(0).getNotes());
+
+        Platform.runLater(() -> {
+
+            if (correct) {
+
+                Image image = new Image(
+                        getClass()
+                        .getResource("/feedbackImages/correct.png")
+                        .toExternalForm()
+                );
+
+                feedbackView.setImage(image);
+
+                incrementScore();
+
+            } else {
+
+                Image image = new Image(
+                        getClass()
+                        .getResource("/feedbackImages/incorrect.jpg")
+                        .toExternalForm()
+                );
+
+                feedbackView.setImage(image);
             }
-        }
+        });
 
+        PauseTransition pause =
+                new PauseTransition(Duration.millis(500));
+
+        pause.setOnFinished(event -> {
+            feedbackView.setImage(null);
+        });
+
+        newMeasure();
+
+        totalMeasures++;
+
+        pause.play();
     }
 
     
-private  class MidiInputReceiver implements Receiver {
+
     
-    /**
-     * Number of unique notes on the keyboard.
-     */
-    private static final int NUM_NOTES = 12;
 
-    /**
-     * Channel for sending and receiving MIDI messages.
-     */
-    private MidiChannel channel;
-
-    /**
-     * List of note names for the inputs currently played.
-     */
-    private Set<Integer> noteNames = new HashSet<>();
-
-    private Node eventTarget;
-
-    /**
-     * Constructs an input receiver.
-     * 
-     * @param name The name of the input receiver.
-     * @param channel The channel for sending and receiving MIDI messages.
-     */
-    public MidiInputReceiver(String name, MidiChannel channel) {
-        this.channel = channel;
-        this.eventTarget = eventTarget;
-    }
-
-   
-
-
-    @Override
-    public void send(MidiMessage message, long timeStamp) {
-        if (message instanceof ShortMessage) {
-            ShortMessage sm = (ShortMessage) message;
-            // Case of pressing PB1 or PB2 for pitch bending. 
-            if (sm.getCommand() >= 0xE0 && sm.getCommand() <= 0xEF) {// if the button pressed is PB1 or PB2 then ignore it 
-                System.out.println("Pitch Bend message ignored");
-                return;
-            }
-
-            if (sm.getCommand() == 0xB0) {// This ignores the pressing of PB1 or PB2 for any modification except pitch bending .
-                int controllerNumber = sm.getData1(); // Controller number
-                if (isPB1OrPB2Controller(controllerNumber)) {
-                    System.out.println("Control Change message from PB1/PB2 ignored");
-                    return;
-                }
-            }
-            int command = sm.getCommand();
-            int rawkey = sm.getData1() ;
-            int key=sm.getData1() % NUM_NOTES;
-            String noteName = getNoteName(key);
-            int velocity = sm.getData2();
-
-            if (command == ShortMessage.NOTE_ON && velocity > 0) {
-                System.out.println("Note ON: " + key + " | Velocity: " + velocity);
-                currentNotes.add(key);
-                if (currentNotes.equals(currentMeasure.get(0).getNotes())){
-                    Image image = new Image(getClass().getResource("/feedbackImages/correct.png").toExternalForm());
-                    feedbackView.setImage(image);
-                    incrementScore();
-                } else {
-                    Image image = new Image(getClass().getResource("/feedbackImages/incorrect.jpg").toExternalForm());
-                    feedbackView.setImage(image);
-                }
-
-                PauseTransition pause = new PauseTransition(Duration.millis(500));
-
-                // After the pause, clear the feedback image
-                pause.setOnFinished(event -> {
-                    Platform.runLater(() -> {
-                        feedbackView.setImage(null);
-                    });
-                });
-
-                newMeasure();
-                totalMeasures++;
-                pause.play();
-               
-                try {
-                    channel.noteOn(rawkey, velocity);
-                } catch (NullPointerException e) {}
-            } else if (command == ShortMessage.NOTE_OFF || (command == ShortMessage.NOTE_ON && velocity == 0)) {
-                System.out.println("Note OFF: " + key);
-                currentNotes.remove(key);
-                
-            
-                try {
-                    channel.noteOff(rawkey);
-                } catch (NullPointerException e) {}
-            }
-        }
-    }
-
-    @Override
-    public void close() {
-        // Implement close if needed for resource management
-    }
-    private boolean isPB1OrPB2Controller(int controllerNumber) {
-        // PB1/PB2 controller numbers may vary; this decides whether the button pressed is PB1 or PB2.
-        return controllerNumber == 1 || controllerNumber == 2; 
-    }
-
-    /**
-     * Returns the list of note names for the input currently being played.
-     * 
-     * @return List of note names for the input currently being played.
-     */
-    public Set<Integer> getNoteNames() {
-        return noteNames;
-    }
-
-    /**
-     * Translates a MIDI key integer value to
-     * a string containing the musical note name
-     * for the corresponding key.
-     * 
-     * @param key The MIDI integer note value.
-     * @return The corresponding musical note name.
-     */
-    public String getNoteName(int key) {
-        String noteName = "";
-        if (key == 11) {
-            noteName = "C";
-        } else if (key == 0) {
-            noteName = "C#";
-        } else if (key == 1) {
-            noteName = "D";
-        } else if (key == 2) {
-            noteName = "D#";
-        } else if (key == 3) {
-            noteName = "E";
-        } else if (key == 4) {
-            noteName = "F";
-        } else if (key == 5) {
-            noteName = "F#";
-        } else if (key == 6) {
-            noteName = "G";
-        } else if (key == 7) {
-            noteName = "G#";
-        } else if (key == 8) {
-            noteName = "A";
-        } else if (key == 9) {
-            noteName = "A#";
-        } else if (key == 10) {
-            noteName = "B";
-        }
-        return noteName;
-    }
-
-    public void setNoteNames(Set<Integer> noteNames) {
-      this.noteNames = noteNames;
-    }
-
-    public void setEventTarget(Node eventTarget) {
-        this.eventTarget = eventTarget;
-    }
-}
 }
 

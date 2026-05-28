@@ -11,7 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.springframework.stereotype.Component;
 
+@Component
 public class LoadingScreenController {
     private Stage stage;
 
