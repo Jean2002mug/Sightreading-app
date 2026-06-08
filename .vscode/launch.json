@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launcher",
+            "request": "launch",
+            "mainClass": "com.example.demo/com.example.demo.Launcher",
+            "projectName": "demo2"
+        },
+        {
+            "type": "java",
             "name": "SpringBootApp",
             "request": "launch",
             "mainClass": "com.example.demo/com.example.SpringBootApp",
