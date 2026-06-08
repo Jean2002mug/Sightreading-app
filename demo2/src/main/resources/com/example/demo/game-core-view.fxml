@@ -24,8 +24,14 @@
   <Line startX="1020.0" startY="460.0" endX="1020.0" endY="390.0" stroke="#FFD700" strokeWidth="5.0" opacity="0.35" />
   <Circle centerX="1008.0" centerY="470.0" radius="14.0" fill="#FFD700" opacity="0.35" />
 
-      <Label fx:id="chordLabel" layoutX="650.0" layoutY="153.0" prefHeight="114.0" prefWidth="103.0"
-             style="-fx-text-fill: #FFD700;" />
+      <Label fx:id="chordLabel"
+       layoutX="450.0"
+       layoutY="125.0"
+       prefHeight="50.0"
+       prefWidth="300.0"
+       text="Note"
+       alignment="CENTER"
+       style="-fx-text-fill: #FFD700; -fx-font-size: 32px; -fx-font-weight: bold;" />
    <Label fx:id="scoreLabel" layoutX="400" layoutY="25" prefHeight="114.0" prefWidth="150.0" text="Score: 0"
           style="-fx-text-fill: #FFD700;">
 
@@ -39,7 +45,7 @@
                <Font size="36.0"/>
            </font>
        </Label>
-       <Button layoutX="850.0" layoutY="45.0" prefHeight="40.0" prefWidth="80.0" text="Pause"
+           <Button fx:id="pauseButton" layoutX="850.0" layoutY="45.0" prefHeight="40.0" prefWidth="80.0" text="Pause"
                style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 14px;"
                onAction="#handleMenuAction" />
        <Button layoutX="940.0" layoutY="45.0" prefHeight="40.0" prefWidth="80.0" text="Tips"

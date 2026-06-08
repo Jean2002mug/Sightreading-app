@@ -1,45 +1,32 @@
 package com.example.demo.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.stage.Stage;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope("prototype")
 public class QuitConfirmationController {
 
     @FXML
-    private void confirmQuit() {
-        Stage stage = (Stage) null;
-        // Get the stage from the scene
-        javafx.scene.Node source = null;
-        if (source != null) {
-            stage = (Stage) source.getScene().getWindow();
-        }
-        
-        // Iterate through all windows to find this one
-        for (javafx.stage.Window window : javafx.stage.Stage.getWindows()) {
-            if (window instanceof Stage) {
-                Stage s = (Stage) window;
-                if (s.getTitle().equals("Confirm Quit")) {
-                    s.setUserData("quit_confirmed");
-                    s.close();
-                    break;
-                }
-            }
-        }
+    private void confirmQuit(ActionEvent event) {
+        Stage stage = getStage(event);
+        stage.setUserData("quit_confirmed");
+        stage.close();
     }
 
     @FXML
-    private void cancelQuit() {
-        // Close the dialog without quitting
-        for (javafx.stage.Window window : javafx.stage.Stage.getWindows()) {
-            if (window instanceof Stage) {
-                Stage s = (Stage) window;
-                if (s.getTitle().equals("Confirm Quit")) {
-                    s.close();
-                    break;
-                }
-            }
-        }
+    private void cancelQuit(ActionEvent event) {
+        Stage stage = getStage(event);
+        stage.setUserData("quit_cancelled");
+        stage.close();
+    }
+
+    private Stage getStage(ActionEvent event) {
+        Node source = (Node) event.getSource();
+        return (Stage) source.getScene().getWindow();
     }
 }

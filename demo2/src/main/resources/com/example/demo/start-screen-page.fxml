@@ -44,5 +44,9 @@
                 text="Minimize"
                 style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 12px;"
                 onAction="#minimizeApp" />
+        <Button layoutX="680.0" layoutY="50.0" prefHeight="50.0" prefWidth="100.0"
+                text="Settings"
+                style="-fx-background-color: #FFD700; -fx-text-fill: #6A0DAD; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 12px;"
+                onAction="#openSettings" />
     </children>
 </AnchorPane>

@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
+import javafx.animation.PauseTransition;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.util.Duration;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -14,11 +17,12 @@ import java.util.function.Consumer;
 public class KeyboardInputService {
 
     private final Map<KeyCode, Integer> keyMap = new HashMap<>();
+    private final Set<Integer> currentNotes = new HashSet<>();
 
     private Consumer<Set<Integer>> noteListener;
+    private PauseTransition inputDelay;
 
     public KeyboardInputService() {
-
         keyMap.put(KeyCode.A, 11); // C
         keyMap.put(KeyCode.W, 0);  // C#
         keyMap.put(KeyCode.S, 1);  // D
@@ -31,6 +35,9 @@ public class KeyboardInputService {
         keyMap.put(KeyCode.H, 8);  // A
         keyMap.put(KeyCode.U, 9);  // A#
         keyMap.put(KeyCode.J, 10); // B
+
+        inputDelay = new PauseTransition(Duration.millis(120));
+        inputDelay.setOnFinished(event -> notifyListener());
     }
 
     public void setNoteListener(Consumer<Set<Integer>> listener) {
@@ -38,22 +45,66 @@ public class KeyboardInputService {
     }
 
     public void attachToScene(Scene scene) {
+        if (scene == null || scene.getRoot() == null) {
+            return;
+        }
 
-        scene.setOnKeyPressed(event -> {
+        currentNotes.clear();
 
+        scene.getRoot().setFocusTraversable(true);
+        scene.getRoot().requestFocus();
+
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             Integer note = keyMap.get(event.getCode());
 
             if (note == null) {
                 return;
             }
 
-            Set<Integer> notes = new HashSet<>();
-
-            notes.add(note);
-
-            if (noteListener != null) {
-                noteListener.accept(notes);
+            synchronized (currentNotes) {
+                currentNotes.add(note);
             }
+
+            inputDelay.playFromStart();
+            event.consume();
         });
+
+        scene.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
+            Integer note = keyMap.get(event.getCode());
+
+            if (note == null) {
+                return;
+            }
+
+            synchronized (currentNotes) {
+                currentNotes.remove(note);
+            }
+
+            event.consume();
+        });
+    }
+
+    public void clearInput() {
+        synchronized (currentNotes) {
+            currentNotes.clear();
+        }
+    }
+
+    private void notifyListener() {
+        if (noteListener == null) {
+            return;
+        }
+
+        Set<Integer> snapshot;
+
+        synchronized (currentNotes) {
+            if (currentNotes.isEmpty()) {
+                return;
+            }
+
+            snapshot = new HashSet<>(currentNotes);
+        }
+
+        noteListener.accept(snapshot);
     }
 }

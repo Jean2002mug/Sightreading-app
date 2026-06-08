@@ -78,6 +78,35 @@ public class MidiService {
             e.printStackTrace();
         }
     }
+    public boolean hasExternalMidiInputDevice() {
+        MidiDevice.Info[] infos = MidiSystem.getMidiDeviceInfo();
+
+        for (MidiDevice.Info info : infos) {
+            try {
+                MidiDevice device = MidiSystem.getMidiDevice(info);
+
+                boolean canTransmit = device.getMaxTransmitters() != 0;
+                String name = info.getName().toLowerCase();
+                String description = info.getDescription().toLowerCase();
+
+                boolean isSoftwareDevice =
+                        name.contains("real time sequencer") ||
+                        name.contains("gervill") ||
+                        description.contains("software") ||
+                        description.contains("sequencer") ||
+                        description.contains("synthesizer");
+
+                if (canTransmit && !isSoftwareDevice) {
+                    return true;
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return false;
+    }
 
     private class MidiInputReceiver implements Receiver {
 

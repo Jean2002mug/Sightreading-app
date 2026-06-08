@@ -8,9 +8,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import com.example.demo.service.FxSceneService;
 
 @Component
+@Scope("prototype")
 public class ResultPageController {
     @FXML
     Label scoreLabel;
@@ -19,6 +22,10 @@ public class ResultPageController {
     Label accuracyLabel;
 
     Stage stage;
+    private final FxSceneService fxSceneService;
+    public ResultPageController(FxSceneService fxSceneService) {
+        this.fxSceneService = fxSceneService;
+    }
 
 
     @FXML
@@ -35,21 +42,27 @@ public class ResultPageController {
     }
 
     public void accuracyLabel(int score, int totalMeasures) {
-        accuracyLabel.setText(Integer.toString((int)((double)score / (double)totalMeasures * 100)) + "%");
+        if (totalMeasures == 0) {
+            accuracyLabel.setText("0%");
+            return;
+        }
+
+        accuracyLabel.setText((int) ((double) score / totalMeasures * 100) + "%");
     }
 
-    public void moveToNextPage(){
+    public void moveToNextPage() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/level-select-page.fxml"));
-            Parent root = loader.load();
-            LevelSelectPageController controller = loader.getController();
-            controller.setStage(stage);
-            Scene scene = new Scene(root);
+            FxSceneService.LoadedView<LevelSelectPageController> view =
+                    fxSceneService.load("/com/example/demo/level-select-page.fxml");
+
+            view.controller().setStage(stage);
+
+            Scene scene = new Scene(view.root());
             stage.setScene(scene);
             stage.show();
 
-        } catch (IOException e){
-
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

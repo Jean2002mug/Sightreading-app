@@ -11,10 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import com.example.demo.service.FxSceneService;
 
 @Component
+@Scope("prototype")
 public class LevelDescriptionController {
     private Stage stage;
     // Variables to hold the complexity levels and the measure generator for the game
@@ -27,6 +29,11 @@ public class LevelDescriptionController {
 
     @FXML
     private Button startButton;
+    private final FxSceneService fxSceneService;
+
+    public LevelDescriptionController(FxSceneService fxSceneService) {
+        this.fxSceneService = fxSceneService;
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -42,16 +49,17 @@ public class LevelDescriptionController {
     @FXML
     private void startLevel() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/clock.fxml"));
-            Parent root = loader.load();
+            FxSceneService.LoadedView<CountDownController> view =
+                fxSceneService.load("/com/example/demo/clock.fxml");
 
-            CountDownController controller = loader.getController();
-            controller.setState(minComplexity, maxComplexity, generator);
-            controller.setStage(stage);
+            view.controller().setState(minComplexity, maxComplexity, generator);
+            view.controller().setStage(stage);
 
-            Scene scene = new Scene(root);
-            controller.startCountdown();
+            Scene scene = new Scene(view.root());
             stage.setScene(scene);
+
+            view.controller().startCountdown();
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -14,9 +14,13 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import com.example.demo.service.FxSceneService;
+
 
 @Component
+@Scope("prototype")
 
 public class CountDownController {
 
@@ -24,6 +28,7 @@ public class CountDownController {
     private Label countDownLabel;
 
     private Timeline timeline;
+    private final FxSceneService fxSceneService;
 
     private static final int COUNTDOWN_SECONDS = 3; // Countdown duration
     private int timeRemaining = COUNTDOWN_SECONDS;
@@ -33,7 +38,9 @@ public class CountDownController {
     private int maxComplexity;// Maximum complexity level for the game
     private MeasureGenerator generator;// Object responsible for generating musical measures based on the specified complexity levels
 
-
+    public CountDownController(FxSceneService fxSceneService) {
+        this.fxSceneService = fxSceneService;
+    }
     public void setState(int minComplexity, int maxComplexity, MeasureGenerator generator){
         this.minComplexity = minComplexity;
         this.maxComplexity = maxComplexity;
@@ -61,20 +68,21 @@ public class CountDownController {
         timeline.setCycleCount(COUNTDOWN_SECONDS);
     }
 
-    private void  moveToNextPage(){
+    private void moveToNextPage() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/game-core-view.fxml"));
-            Parent root = loader.load();
-            GameController controller = loader.getController();
-            controller.setStage(stage, this.minComplexity, this.maxComplexity);
-            Scene scene = new Scene(root);
+            FxSceneService.LoadedView<GameController> view =
+                    fxSceneService.load("/com/example/demo/game-core-view.fxml");
+
+            Scene scene = new Scene(view.root());
+
+            view.controller().setStage(stage, minComplexity, maxComplexity, scene);
+
             stage.setScene(scene);
             stage.show();
 
-        } catch (IOException e){
-
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
     }
 
     public void startCountdown() {

@@ -7,12 +7,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import com.example.demo.service.FxSceneService;
 
 @Component
+@Scope("prototype")
 public class LevelSelectPageController {
     private Stage stage;
+    private final FxSceneService fxSceneService;
+
+    public LevelSelectPageController(FxSceneService fxSceneService) {
+        this.fxSceneService = fxSceneService;
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -28,15 +35,13 @@ public class LevelSelectPageController {
 
     private void moveToDescriptionPage(int minComplexity, int maxComplexity, String description) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/LevelDescription.fxml"));
-            Parent root = loader.load();
+            FxSceneService.LoadedView<LevelDescriptionController> view =
+                fxSceneService.load("/com/example/demo/LevelDescription.fxml");
 
-            LevelDescriptionController controller = loader.getController();
-            controller.setStage(stage);
-            controller.setLevelDetails(minComplexity, maxComplexity, description);
+            view.controller().setStage(stage);
+            view.controller().setLevelDetails(minComplexity, maxComplexity, description);
 
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+            stage.setScene(new Scene(view.root()));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,12 +51,12 @@ public class LevelSelectPageController {
     @FXML
     private void backToStartPage() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/start-screen-page.fxml"));
-            Parent root = loader.load();
-            StartScreenController controller = loader.getController();
-            controller.setStage(stage);
-            Scene scene = new Scene(root, 1200, 600);
-            stage.setScene(scene);
+             FxSceneService.LoadedView<StartScreenController> view =
+                fxSceneService.load("/com/example/demo/start-screen-page.fxml");
+
+            view.controller().setStage(stage);
+
+            stage.setScene(new Scene(view.root(), 1200, 600));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

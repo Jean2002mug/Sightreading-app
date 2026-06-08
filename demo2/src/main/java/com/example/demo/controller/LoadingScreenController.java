@@ -11,9 +11,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import com.example.demo.service.FxSceneService;
+import com.example.demo.controller.StartScreenController;
 
 @Component
+@Scope("prototype")
 public class LoadingScreenController {
     private Stage stage;
 
@@ -21,6 +25,10 @@ public class LoadingScreenController {
     private ProgressBar progressBar;
 
     private boolean loadingStarted;
+    private final FxSceneService fxSceneService;
+    public LoadingScreenController(FxSceneService fxSceneService) {
+        this.fxSceneService = fxSceneService;
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -42,7 +50,7 @@ public class LoadingScreenController {
 
         Timeline loadingTimeline = new Timeline(
             new KeyFrame(Duration.ZERO, new KeyValue(progressBar.progressProperty(), 0)),
-            new KeyFrame(Duration.seconds(3), new KeyValue(progressBar.progressProperty(), 1))
+            new KeyFrame(Duration.seconds(1), new KeyValue(progressBar.progressProperty(), 1))
         );
 
         loadingTimeline.setOnFinished(event -> showStartScreen());
@@ -51,14 +59,16 @@ public class LoadingScreenController {
 
     private void showStartScreen() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/start-screen-page.fxml"));
-            Parent root = loader.load();
-            StartScreenController controller = loader.getController();
-            controller.setStage(stage);
-            stage.setScene(new Scene(root, 1200, 600));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+                FxSceneService.LoadedView<StartScreenController> view =
+                        fxSceneService.load("/com/example/demo/start-screen-page.fxml");
+
+                view.controller().setStage(stage);
+
+                stage.setScene(new Scene(view.root(), 1200, 600));
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
-}
